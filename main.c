@@ -2,16 +2,10 @@
 
 int main (void)
 {
-    String s1, *s2;
+    String s1, s2;
     s1 = create();
+    s2 = create();
 
-    //way to DEBUG
-    s2 = &s1;
-    while(s2->strNext != NULL)
-    {
-        printf("%c\n", s2->cChar);
-        s2 = s2->strNext;
-    }
     //add (s1, 'e');
     //add (s1, 'l');
     //add (s1, 'l');
@@ -49,13 +43,11 @@ String create ()
 
     //create individual nodes in the linked list (String)
     //these nodes are not yet attached to the linked list
-    //DEBUGGER-change to MIN_SIZE
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < MIN_SIZE; i++)
     {
         strTemp = (String*)malloc(sizeof(String));
         //to make sure every character is null after creation
-        //DEBUGGER-change to '\0'
-        strTemp->cChar = 'F';
+        strTemp->cChar = '\0';
         strTemp->strNext = NULL;
 
         //if linked list is still empty; make strTemp as the first node
