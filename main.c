@@ -35,36 +35,17 @@ int main (void)
     return 0;
 }
 
+//To check how typedef String works when you want to add another node in the linked list
+//(another character in a String), see the create() of the StringtTypedef-Create branch
 String create ()
 {
-    String* strHead = NULL;
-    String* strTrail = NULL;
     String* strTemp = NULL;
 
-    //create individual nodes in the linked list (String)
-    //these nodes are not yet attached to the linked list
-    for(int i = 0; i < MIN_SIZE; i++)
-    {
-        strTemp = (String*)malloc(sizeof(String));
-        //to make sure every character is null after creation
-        strTemp->cChar = '\0';
-        strTemp->strNext = NULL;
+    //dynamic memory allocation
+    strTemp = (String*)malloc(sizeof(String));
+    //to make sure returned character is null after creation
+    strTemp->cChar = '\0';
+    strTemp->strNext = NULL;
 
-        //if linked list is still empty; make strTemp as the first node
-        if(strHead == NULL)
-        {
-            strHead = strTemp;
-        }
-        else
-        {
-            strTrail = strHead;
-            while(strTrail->strNext != NULL)
-            {
-                strTrail = strTrail->strNext;
-            }
-            strTrail->strNext = strTemp; //attach next nodes to linked list
-        }
-    }
-
-    return *strHead;
+    return *strTemp;
 }

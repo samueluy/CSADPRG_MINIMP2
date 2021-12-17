@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//default size of String is 100 (+1 for null character to end String)
-//may be changed to 100 later 
-#define MIN_SIZE 101 
+#define MIN_SIZE 1 
 
 //String data type that is implemented using a linked list
 typedef struct String
