@@ -16,5 +16,5 @@ String create(); //creates a String
 //String delete (String s, int pos);
 //String substitute (String s, String find, String replace);
 //int compare (String s1, String s2);
-//int getLength(String s);
-//void print (String s);  
+int getLength(String s);
+void print (String s);  
