@@ -49,3 +49,41 @@ String create ()
 
     return *strTemp;
 }
+
+/**
+ * @brief Prints the whole String via recuression method
+ * 
+ * @param str String to be printed
+ */
+void print(String str)
+{
+    printf("%c",str.cChar); // Print the current char of the node
+
+    // If next node is not NULL
+    if (str.strNext != NULL)
+    {
+        print(*str.strNext);  // Print the next node
+    }
+}
+
+/**
+ * @brief Gets the length of the  parameter String
+ * 
+ * @param str String to be length measured
+ * @return int the length of the Strign(str)
+ */
+int getLength(String str)
+{
+    int nCtr = 0;
+    String* strCurrent = &str;
+
+    // Check if the end of the String
+    while(strCurrent != NULL )
+    {
+        nCtr++; // Increment String length 
+        strCurrent = strCurrent->strNext; // Change struct string to be checked later
+
+    }
+
+    return nCtr;
+}
