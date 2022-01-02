@@ -1,4 +1,5 @@
 #include "header.h"
+#include "string.h"
 
 int main (void)
 {
@@ -6,10 +7,11 @@ int main (void)
     s1 = create();
     s2 = create();
 
-    //add (s1, 'e');
-    //add (s1, 'l');
-    //add (s1, 'l');
-    //add (s1, 'o');
+	add (s1, 'H');
+    add (s1, 'e');
+    add (s1, 'l');
+    add (s1, 'l');
+    add (s1, 'o');
     //
     //add (s2, 'H');
     //add (s2, 'e');
@@ -17,13 +19,13 @@ int main (void)
     //add (s2, 'l');
     //add (s2, 'o');
     //add (s2, ' ');
-    //add (s2, 'W');
+    //add (s2, 'W');	
     //add (s2, 'o');
     //add (s2, 'r');
     //add (s2, 'l');
     //add (s2, 'd');
 
-    //print (s1);   // this statement will display (Hello)
+    print (s1);   // this statement will display (Hello)
     //add (s2, '!');
     //print (s2); // this statement will display (Hello World!)
     //print (insert(s2, 11, 's')); // this statement will return (Hello Worlds!)
@@ -48,6 +50,31 @@ String create ()
     strTemp->strNext = NULL;
 
     return *strTemp;
+}
+
+void concat(String *a, String *b){
+    if (a->strNext == NULL)
+        a->strNext = b;
+    else
+        concat(a->strNext,b);
+}
+
+/**
+ * @brief Adds a character c to the end of the String s
+ * 
+ * @param String s : string to be manipulated
+   		  char c : character to be added
+   		  
+ * @return String : the pointer of the first element in String s
+ */
+String add (String s, char c){
+	String* strTemp = NULL;
+	
+	strTemp->cChar = c;
+	strTemp->strNext = '\0';
+	concat(&s, strTemp);
+	
+	return s;
 }
 
 /**
