@@ -7,7 +7,7 @@
 struct linkedList
 {
     char cChar; //data of type char stored in a node
-    struct String* strNext; //pointer to the next node of the linked list
+    struct linkedList* strNext; //pointer to the next node of the linked list
 };
 
 typedef struct linkedList* String;

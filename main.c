@@ -41,18 +41,18 @@ int main (void)
 //(another character in a String), see the create() of the StringtTypedef-Create branch
 String create ()
 {
-    String* strTemp = NULL;
+    String strTemp = NULL;
 
     //dynamic memory allocation
-    strTemp = (String*)malloc(sizeof(String));
+    strTemp = malloc(sizeof(String));
     //to make sure returned character is null after creation
     strTemp->cChar = '\0';
     strTemp->strNext = NULL;
 
-    return *strTemp;
+    return strTemp;
 }
 
-void concat(String *a, String *b){
+void concat(String a, String b){
     if (a->strNext == NULL)
         a->strNext = b;
     else
@@ -68,11 +68,11 @@ void concat(String *a, String *b){
  * @return String : the pointer of the first element in String s
  */
 String add (String s, char c){
-	String* strTemp = NULL;
+	String strTemp = NULL;
 	
 	strTemp->cChar = c;
-	strTemp->strNext = '\0';
-	concat(&s, strTemp);
+	strTemp->strNext = NULL;
+	concat(s, strTemp);
 	
 	return s;
 }
@@ -84,12 +84,12 @@ String add (String s, char c){
  */
 void print(String str)
 {
-    printf("%c",str.cChar); // Print the current char of the node
+    printf("%c",str->cChar); // Print the current char of the node
 
     // If next node is not NULL
-    if (str.strNext != NULL)
+    if (str->strNext != NULL)
     {
-        print(*str.strNext);  // Print the next node
+        print(str->strNext);  // Print the next node
     }
 }
 
@@ -102,7 +102,7 @@ void print(String str)
 int getLength(String str)
 {
     int nCtr = 0;
-    String* strCurrent = &str;
+    String strCurrent = str;
 
     // Check if the end of the String
     while(strCurrent != NULL )
