@@ -4,11 +4,13 @@
 #define MIN_SIZE 1 
 
 //String data type that is implemented using a linked list
-typedef struct String
+struct linkedList
 {
     char cChar; //data of type char stored in a node
     struct String* strNext; //pointer to the next node of the linked list
-}String;
+};
+
+typedef struct linkedList* String;
 
 String create(); //creates a String 
 String add (String s, char c);
