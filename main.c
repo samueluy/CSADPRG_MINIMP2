@@ -1,5 +1,4 @@
 #include "header.h"
-#include "string.h"
 
 int main (void)
 {
@@ -12,22 +11,22 @@ int main (void)
     add (s1, 'l');
     add (s1, 'l');
     add (s1, 'o');
-    //
-    //add (s2, 'H');
-    //add (s2, 'e');
-    //add (s2, 'l');
-    //add (s2, 'l');
-    //add (s2, 'o');
-    //add (s2, ' ');
-    //add (s2, 'W');	
-    //add (s2, 'o');
-    //add (s2, 'r');
-    //add (s2, 'l');
-    //add (s2, 'd');
+    
+    add (s2, 'H');
+    add (s2, 'e');
+    add (s2, 'l');
+    add (s2, 'l');
+    add (s2, 'o');
+    add (s2, ' ');
+    add (s2, 'W');	
+    add (s2, 'o');
+    add (s2, 'r');
+    add (s2, 'l');
+    add (s2, 'd');
 
     print (s1);   // this statement will display (Hello)
-    //add (s2, '!');
-    //print (s2); // this statement will display (Hello World!)
+    add (s2, '!');
+    print (s2); // this statement will display (Hello World!)
     //print (insert(s2, 11, 's')); // this statement will return (Hello Worlds!)
     //print (delete(s2, 11)); // this statement will return (Hello World)
     //print (substitute(s2, "World", "CCPROG")); // this statement will return (Hello CCPROG!)
@@ -52,13 +51,6 @@ String create ()
     return strTemp;
 }
 
-void concat(String a, String b){
-    if (a->strNext == NULL)
-        a->strNext = b;
-    else
-        concat(a->strNext,b);
-}
-
 /**
  * @brief Adds a character c to the end of the String s
  * 
@@ -68,13 +60,19 @@ void concat(String a, String b){
  * @return String : the pointer of the first element in String s
  */
 String add (String s, char c){
-	String strTemp = NULL;
-	
-	strTemp->cChar = c;
-	strTemp->strNext = NULL;
-	concat(s, strTemp);
-	
-	return s;
+	while ( s->strNext != NULL ) s = s->strNext;
+
+    s->strNext = malloc( sizeof( String ) );
+    int success = s->strNext != NULL;
+
+    if (success)
+    {
+        s->cChar = c;
+        s->strNext->cChar = '\0';
+        s->strNext->strNext = NULL;
+    }
+
+    return s;
 }
 
 /**
