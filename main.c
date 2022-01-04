@@ -30,7 +30,7 @@ int main (void)
     //print (insert(s2, 11, 's')); // this statement will return (Hello Worlds!)
     //print (delete(s2, 11)); // this statement will return (Hello World)
     //print (substitute(s2, "World", "CCPROG")); // this statement will return (Hello CCPROG!)
-    //print (compare(s1, s2)); // this statement will return (0)
+    compare(s1, s2); // this statement will return (0)
     //print (getLength(s1));// this statement will return (5)
 
     return 0;
@@ -92,6 +92,87 @@ void print(String str)
 }
 
 /**
+ * @brief Finds a substring from a string and if found, replaces it with another string.
+ * 
+ * @param String s Base string
+ * @param String find Substring to search for
+ * @param String replace String to replace with
+ * @return String modified string
+ 
+ String substitute(String s, String find, String replace)
+ {
+ 	int i, nCount, flag=1, findLen;
+ 	findLen = getLength(find);
+ 	String s1Current = s;
+ 	String s2Current = find;
+ 	
+    while(s1Current != NULL){
+    	if(s1Current == s2Current){
+    		while(s2Current != NULL){
+    			if(s1Current != s2Current) // exit loop because different
+				{
+					nCount++;
+					flag=0;
+					break;
+				}
+    			else
+				{
+    				s1Current = s1Current->strNext;
+	    			s2Current = s2Current->strNext;
+		 			nCount++;
+				}
+			}
+	 		
+			return;
+		 }
+	 	else{ // next character
+	 		s2Current = find; // reset
+	 		s1Current = s1Current->strNext;
+	 		nCount++;
+		 }
+	}
+	 
+    return newString;
+ }
+*/
+/**
+ * @brief Checks if two strings are similar
+ * 
+ * @param String s1 Source string to be compared
+ * @param String s2 Target string to compare
+ * @return int 0 = Different; 1 = Similar
+ */
+ 
+ void compare(String s1, String s2)
+ {
+	String s1Current = s1;
+	String s2Current = s2;
+	
+ 	// Check if the lenghts are the same
+ 	 if(getLength(s1) != getLength(s2)){
+ 	 	printf("0");
+ 	 	return;
+	  }
+ 		
+ 	// Chech the equivalence of each character
+ 	
+ 	while(s1Current != NULL)
+	 {
+	 	if(s1Current!=s2Current){
+	 		printf("0");
+			return;
+		 }
+	 	else{ // next character
+	 		s1Current = s1Current->strNext;
+	 		s2Current = s2Current->strNext;
+		 }
+	 }
+	 
+	 printf("1");
+	 return;
+ }
+
+/**
  * @brief Gets the length of the  parameter String
  * 
  * @param str String to be length measured
@@ -109,6 +190,6 @@ int getLength(String str)
         strCurrent = strCurrent->strNext; // Change struct string to be checked later
 
     }
-
+	
     return nCtr;
 }
