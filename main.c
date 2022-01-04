@@ -57,20 +57,15 @@ String create ()
  * @param String s : string to be manipulated
    		  char c : character to be added
    		  
- * @return String : the pointer of the first element in String s
+ * @return String s : the pointer of the first element in String s
  */
 String add (String s, char c){
-	while ( s->strNext != NULL ) s = s->strNext;
+	while (s->strNext != NULL) s = s->strNext;
 
-    s->strNext = malloc( sizeof( String ) );
-    int success = s->strNext != NULL;
-
-    if (success)
-    {
-        s->cChar = c;
-        s->strNext->cChar = '\0';
-        s->strNext->strNext = NULL;
-    }
+    s->strNext = malloc(sizeof(String));
+    s->cChar = c;
+    s->strNext->cChar = '\0';
+    s->strNext->strNext = NULL;
 
     return s;
 }
