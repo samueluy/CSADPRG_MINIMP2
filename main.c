@@ -2,9 +2,11 @@
 
 int main (void)
 {
-    String s1, s2;
+    String s1, s2, s3, s4;
     s1 = create();
     s2 = create();
+    s3 = create(); // Find
+    s4 = create(); // Replace
 
 	add (s1, 'H');
     add (s1, 'e');
@@ -24,11 +26,29 @@ int main (void)
     add (s2, 'l');
     add (s2, 'd');
 
+	add (s3, 'W');
+    add (s3, 'o');
+    add (s3, 'r');
+    add (s3, 'l');
+    add (s3, 'd');
+    
+    add (s3, 'C');
+    add (s3, 'C');
+    add (s3, 'P');
+    add (s3, 'R');
+    add (s3, 'O');
+    add (s3, 'G');
+    
     print (s1);   // this statement will display (Hello)
     add (s2, '!');
     print (s2); // this statement will display (Hello World!)
     //print (insert(s2, 11, 's')); // this statement will return (Hello Worlds!)
     //print (delete(s2, 11)); // this statement will return (Hello World)
+
+    
+    
+    
+    //print (substitute(s2, s3, s4)); // this statement will return (Hello CCPROG!)
     //print (substitute(s2, "World", "CCPROG")); // this statement will return (Hello CCPROG!)
     compare(s1, s2); // this statement will return (0)
     //print (getLength(s1));// this statement will return (5)
@@ -93,43 +113,83 @@ void print(String str)
  * @param String find Substring to search for
  * @param String replace String to replace with
  * @return String modified string
- 
+ */
  String substitute(String s, String find, String replace)
  {
- 	int i, nCount, flag=1, findLen;
+ 	int nCount, findLen, simCount=0, found=0;
  	findLen = getLength(find);
  	String s1Current = s;
- 	String s2Current = find;
+ 	String s2Current = find; // default value
+ 	String s3Current = replace;
+ 	int lengthOfFind = getLength(find);
+ 	String newString;
+ 	String newTemp = s;
+ 	newString = create();
  	
-    while(s1Current != NULL){
-    	if(s1Current == s2Current){
-    		while(s2Current != NULL){
+    while(s1Current != NULL){ // itterate each character of s
+    printf("here");
+    	if(s1Current == s2Current){ // if first letter is similar
+    		while(s2Current != NULL){ // itterate through each character of find
+    		
     			if(s1Current != s2Current) // exit loop because different
 				{
-					nCount++;
-					flag=0;
-					break;
+					nCount++; // start from here
+					simCount=0; // reset similarity counter
+					break; // exit the loop
 				}
-    			else
+    			else // proceed to next character
 				{
-    				s1Current = s1Current->strNext;
+					if(simCount==findLen) // check if text is already similar
+					{ 
+						nCount-=findLen; // character count till the start of the word
+						found=1; 
+						break; // exit loop
+					}
+    				s1Current = s1Current->strNext; 
 	    			s2Current = s2Current->strNext;
 		 			nCount++;
 				}
 			}
 	 		
-			return;
+			break;
 		 }
 	 	else{ // next character
 	 		s2Current = find; // reset
 	 		s1Current = s1Current->strNext;
 	 		nCount++;
 		 }
+		 
+		 if(found)
+		 {
+		 	while(newTemp->strNext != NULL)
+		 	{
+		 		if(nCount==0) // in first character of find
+				 {
+				 	while(s3Current != NULL) // itterate for the length of replace
+				 	{
+		 			add(newString, s3Current->cChar);
+		 			s3Current = s3Current->strNext; // next character
+		 			}
+		 			while(lengthOfFind != 0)
+		 			{
+		 				newTemp = newTemp->strNext; // move to the end of find
+					}
+					nCount=-1; // exit if condition
+				 }
+		 		add(newString, newTemp->cChar); // add current char to newString
+		 		newTemp = newTemp->strNext; // next character of newTemp
+		 		nCount--; //
+			}
+		 }
+		 else // no similarities found
+		 {
+		 	printf("Error! Substitution couldn’t be performed\n");
+		 }
 	}
 	 
     return newString;
  }
-*/
+
 /**
  * @brief Checks if two strings are similar
  * 
