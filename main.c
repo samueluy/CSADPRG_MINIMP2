@@ -56,14 +56,17 @@ int main (void)
     return 0;
 }
 
-//To check how typedef String works when you want to add another node in the linked list
-//(another character in a String), see the create() of the StringtTypedef-Create branch
+/**
+ * @brief Returns an empty String
+ * 
+ * @return String   empty String 
+ */
 String create ()
 {
     String strTemp = NULL;
 
     //dynamic memory allocation
-    strTemp = malloc(sizeof(String));
+    strTemp = (String) malloc(sizeof(struct linkedList));
     //to make sure returned character is null after creation
     strTemp->cChar = '\0';
     strTemp->strNext = NULL;
@@ -82,7 +85,7 @@ String create ()
 String add (String s, char c){
 	while (s->strNext != NULL) s = s->strNext;
 
-    s->strNext = malloc(sizeof(String));
+    s->strNext = (String) malloc(sizeof(struct linkedList));
     s->cChar = c;
     s->strNext->cChar = '\0';
     s->strNext->strNext = NULL;
@@ -183,7 +186,7 @@ void print(String str)
 		 }
 		 else // no similarities found
 		 {
-		 	printf("Error! Substitution couldn’t be performed\n");
+		 	printf("Error! Substitution couldnï¿½t be performed\n");
 		 }
 	}
 	 
