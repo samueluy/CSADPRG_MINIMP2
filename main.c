@@ -45,9 +45,9 @@ int main (void)
     //print (insert(s2, 11, 's')); // this statement will return (Hello Worlds!)
     //print (delete(s2, 11)); // this statement will return (Hello World)
  
-    //print (substitute(s2, s3, s4)); // this statement will return (Hello CCPROG!)
+    print (substitute(s2, s3, s4)); // this statement will return (Hello CCPROG!)
     //print (substitute(s2, "World", "CCPROG")); // this statement will return (Hello CCPROG!)
-    compare(s1, s2); // this statement will return (0)
+    printf("%d", compare(s1, s2)); // this statement will return (0)
     //print (getLength(s1));// this statement will return (5)
 
     return 0;
@@ -116,13 +116,49 @@ void print(String str)
  */
  String substitute(String s, String find, String replace)
  {
-	/*
-	create a temp string -> loop till " "
-	after " ", we compare if similar with String find
-	if similar, insert String replace. -> we count the spaces and if == we do insert(), mmem then just print the rest
-	else, Error
-	*/
-    return s;
+ 	String tempWord; // String variable which holds one word at a time
+ 	String newString; // replaced String
+ 	newString = create();
+	
+	while(s != NULL)
+	{
+		tempWord = create();
+		while(s->cChar != ' ' && s->cChar != '\0') // Split String word per word
+		{
+			add(tempWord, s->cChar);
+			s = s->strNext;		
+		}
+		
+		if(compare(tempWord, find)) // add each letter of replace to the new String
+		{
+			while(replace != NULL)
+			{
+				add(newString, replace->cChar);
+				replace = replace->strNext;
+			}
+			
+			while(tempWord != NULL){ // Check and add trailing symbol
+				if((tempWord->cChar >= 33 && tempWord->cChar <= 47) || (tempWord->cChar >= 58 && tempWord->cChar <= 64) ||
+			  	(tempWord->cChar >= 91 && tempWord->cChar <= 96) || (tempWord->cChar >= 123 && tempWord->cChar <= 126))
+					add(newString, tempWord->cChar);
+
+				tempWord = tempWord->strNext;
+			}
+		}
+		else // add each letter of tempWord to the new String
+		{
+			while(tempWord != NULL)
+			{
+				add(newString, tempWord->cChar);
+				tempWord = tempWord->strNext;
+			}
+		}
+		
+		free(tempWord); // empty tempWord
+		
+		s = s->strNext;
+	}
+    return newString;
  }
 
 /**
@@ -133,13 +169,12 @@ void print(String str)
  * @return int 0 = Different; 1 = Similar
  */
  
- void compare(String s1, String s2)
+ int compare(String s1, String s2)
  {
- 	
 	String s1Current;
 	String s2Current = s2;
 	s1Current = create();
-	
+
 	while(s1 != NULL) // create a temporarry String which does not contain any special character
 	{
 		if((s1->cChar >= 65 && s1->cChar <= 90) || (s1->cChar >= 97 && s1->cChar <= 122))
@@ -150,26 +185,23 @@ void print(String str)
 	
 	
  	// Check if the lenghts are the same
- 	 if(getLength(s1Current) != getLength(s2)){
- 	 	printf("0");
- 	 	return;
-	  }
+ 	 if(getLength(s1Current) != getLength(s2))
+ 	 	return 0;
+	  
  		
  	// Chech the equivalence of each character
  	while(s1Current != NULL)
 	 {
-	 	if(s1Current->cChar!=s2Current->cChar){
-	 		printf("0");
-			return;
-		 }
-	 	else{ // next character
+	 	if(s1Current->cChar!=s2Current->cChar)
+			return 0;
+		 
+	 	else // next character
+		 { 
 	 		s1Current = s1Current->strNext;
 	 		s2Current = s2Current->strNext;
 		 }
 	 }
-	 
-	 printf("1");
-	 return;
+	 return 1;
  }
 
 /**
