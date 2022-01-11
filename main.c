@@ -91,6 +91,46 @@ String add (String s, char c){
 }
 
 /**
+ * @brief Deletes a character from String s at index int pos/
+ * 
+ * @param String s : string to be manipulated
+   		  int pos : index of the position of the character to be deleted
+   		  
+ * @return String : the pointer of the first element in String s
+ */
+ 
+ String delete (String s, int pos)
+ {	
+    // Stores the head of the linked list
+    struct linkedList* strTemp = s;
+ 
+    // If position 0 needs to be removed
+    if (pos == 0) {
+        s = strTemp->strNext; // change head of the linked list
+        free(strTemp); // free memory of deleted node
+    }
+ 
+ 	else 
+ 	{
+ 		 // Loop until node before the node to be deleted is found
+	    for (int i = 0; strTemp != NULL && i < pos - 1; i++)
+	        strTemp = strTemp->strNext;
+	        
+	    // stores the node after the node to be deleted
+	    struct linkedList* next = strTemp->strNext->strNext;
+	    
+	    // free memory of node to be deleted
+	    free(strTemp->strNext); 
+	 
+	    strTemp->strNext = next; // ulink the deleted node from the linked list
+	 
+	}
+   
+	return s; 	
+  	
+}
+
+/**
  * @brief Prints the whole String via recuression method
  * 
  * @param str String to be printed
