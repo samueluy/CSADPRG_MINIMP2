@@ -40,15 +40,19 @@ int main (void)
     add (s4, 'G');
 
     print (s1);   // this statement will display (Hello)
+	printf("\n");
     add (s2, '!');
     print (s2); // this statement will display (Hello World!)
-    //print (insert(s2, 11, 's')); // this statement will return (Hello Worlds!)
-    //print (delete(s2, 11)); // this statement will return (Hello World)
- 
+	printf("\n");
+    print (insert(s2, 's', 11)); // this statement will return (Hello Worlds!)
+	printf("\n");
+    print (delete(s2, 11)); // this statement will return (Hello World)
+	printf("\n");
     print (substitute(s2, s3, s4)); // this statement will return (Hello CCPROG!)
-    //print (substitute(s2, "World", "CCPROG")); // this statement will return (Hello CCPROG!)
+	printf("\n");
     printf("%d", compare(s1, s2)); // this statement will return (0)
-    //print (getLength(s1));// this statement will return (5)
+	printf("\n");
+    printf ("%d", getLength(s1));// this statement will return (5)
 
     return 0;
 }
@@ -88,6 +92,36 @@ String add (String s, char c){
     s->strNext->strNext = NULL;
 
     return s;
+}
+
+/**
+ * @brief Inserts a new character into a given position in the given String
+ * 
+ * @param String s : string to be manipulated
+ *        char c  : character to be inserted
+ * 	      int pos : index of the position where a given character is to be inserted
+ *
+ * @return String : the pointer to the first element in String s
+ */
+String insert (String s, char c, int pos){
+	int nTemp = -1;
+	String strTemp;
+	strTemp = create(); //creates a temporary String
+	while(s->strNext != NULL){
+		nTemp++;
+		if(nTemp == pos){ 
+			//inserts the character into strTemp
+			add(strTemp, c);
+		}
+		add(strTemp, s->cChar);
+		s = s->strNext;
+	}
+	//deallocates the memory used by s to reduce wastage of memory
+	free(s);
+	//make the pointer to the first element in String s equal to the 
+	//pointer to the first element in strTemp
+	s = strTemp;
+	return s;
 }
 
 /**
@@ -248,7 +282,7 @@ void print(String str)
  * @brief Gets the length of the  parameter String
  * 
  * @param str String to be length measured
- * @return int the length of the Strign(str)
+ * @return int the length of the String(str)
  */
 int getLength(String str)
 {
@@ -256,7 +290,7 @@ int getLength(String str)
     String strCurrent = str;
 
     // Check if the end of the String
-    while(strCurrent != NULL )
+    while(strCurrent->strNext != NULL)
     {
         nCtr++; // Increment String length 
         strCurrent = strCurrent->strNext; // Change struct string to be checked later
