@@ -48,7 +48,7 @@ int main (void)
 	printf("\n");
     print (delete(s2, 11)); // this statement will return (Hello World)
 	printf("\n");
-    print (substitute(s2, s3, s4)); // this statement will return (Hello CCPROG!)
+    print (substitute(s2, s3, s4)); // this statement will return (Hello CCPROG)
 	printf("\n");
     printf("%d", compare(s1, s2)); // this statement will return (0)
 	printf("\n");
@@ -146,8 +146,9 @@ String insert (String s, char c, int pos){
  
  	else 
  	{
+ 		int i;
  		 // Loop until node before the node to be deleted is found
-	    for (int i = 0; strTemp != NULL && i < pos - 1; i++)
+	    for (i = 0; strTemp != NULL && i < pos - 1; i++)
 	        strTemp = strTemp->strNext;
 	        
 	    // stores the node after the node to be deleted
