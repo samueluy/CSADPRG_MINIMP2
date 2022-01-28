@@ -202,9 +202,6 @@ void print(String str)
 		{
 			add(tempWord, s->cChar);
 			s = s->strNext;		
-			if(s->cChar == ' '){
-				add(tempWord, s->cChar);
-			}
 		}
 		
 		if(compare(tempWord, find)) // add each letter of replace to the new String
