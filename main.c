@@ -201,7 +201,7 @@ void print(String str)
 		while(s->cChar != ' ' && s->cChar != '\0') // Split String word per word
 		{
 			add(tempWord, s->cChar);
-			s = s->strNext;		
+			s = s->strNext;
 		}
 		
 		if(compare(tempWord, find)) // add each letter of replace to the new String
@@ -212,6 +212,8 @@ void print(String str)
 				replace = replace->strNext;
 			}
 			
+			delete(newString, getLength(newString)-1); // Removes space
+
 			while(tempWord != NULL){ // Check and add trailing symbol
 				if((tempWord->cChar >= 33 && tempWord->cChar <= 47) || (tempWord->cChar >= 58 && tempWord->cChar <= 64) ||
 			  	(tempWord->cChar >= 91 && tempWord->cChar <= 96) || (tempWord->cChar >= 123 && tempWord->cChar <= 126))
